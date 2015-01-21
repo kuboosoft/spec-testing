@@ -493,6 +493,6 @@ chrpath --delete %{buildroot}/usr/bin/amdcccle
 %changelog
 
 * Fri Jan 16 2015 David Vásquez <davidjeremias82 AT gmail DOT com> - 14.12-1
-- For testing propurses
+- For testing purposes
 - Initial build
 - A fork of PKGBUILD AUR Arch Linux thanks to Vi0L0 <vi0l093 AT gmail DOT com>
