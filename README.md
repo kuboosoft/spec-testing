@@ -1,2 +1,2 @@
 # spec-testing
-spec for testing purposes rpm- PostInstallerF
+spec for testing purposes rpm
