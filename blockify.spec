@@ -15,7 +15,7 @@ Group:      Applications/Multimedia
 BuildArch:  noarch
 Url:        https://github.com/mikar/blockify
 
-BuildRequires: pygtk2-devel python2-devel python2-setuptools gnome-python2-libwnck python-dbus alsa-utils gstreamer-python pulseaudio python-docopt
+BuildRequires: pygtk2-devel python-devel python-setuptools gnome-python2-libwnck python-dbus alsa-utils gstreamer-python pulseaudio python-docopt
 #-------------------------------------
 Requires:   pygtk2 gnome-python2-libwnck python-dbus alsa-utils gstreamer-python pulseaudio python-docopt 
 
