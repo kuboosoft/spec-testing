@@ -43,16 +43,22 @@ qmake-qt5
 make
 
 %install
+
+install -dm 755 %{buildroot}/%{_datadir}/doc/%{name}
+install -dm 755 %{buildroot}/%{_bindir}
+
 install -Dm0644 ./style/libkvantum.so %{buildroot}/%{_libdir}/qt5/plugins/styles/libkvantum.so
 install -Dm0644 ./color/%{realname}.colors %{buildroot}/%{_datadir}/apps/color-schemes/%{realname}.colors
 
-install -dm 755 %{buildroot}/%{_libdir}/qt4/plugins/styles/
+install -dm 755 %{buildroot}/%{_libdir}/qt4/plugins/styles
 ln -sf %{_libdir}/qt5/plugins/styles/libkvantum.so %{buildroot}/%{_libdir}/qt4/plugins/styles/libkvantum.so
 
-install -Dm0644 ./kvantummanager/kvantummanager  %{buildroot}/%{_bindir}/kvantummanager
-install -Dm0644 ./kvantumpreview/kvantumpreview  %{buildroot}/%{_bindir}/kvantumprevie
+install -m 0644 ./kvantummanager/kvantummanager  %{buildroot}/%{_bindir}/
+install -m 0644 ./kvantumpreview/kvantumpreview  %{buildroot}/%{_bindir}/
+chmod a+x %{buildroot}/%{_bindir}/kvantummanager
+chmod a+x %{buildroot}/%{_bindir}/kvantumpreview
 
-install -Dm0644 ./doc/* %{buildroot}/%{_datadir}/doc/%{name}/
+cp -rf ./doc/* %{buildroot}/%{_datadir}/doc/%{name}/
 install -Dm0644 ./kvantumpreview/kvantum.svg %{buildroot}/%{_datadir}/pixmaps/kvantum.svg
 install -Dm0644 ./kvantummanager/data/kvantummanager.desktop %{buildroot}/%{_datadir}/applications/kvantummanager.desktop
 
@@ -60,13 +66,14 @@ install -Dm0644 ./kvantummanager/data/kvantummanager.desktop %{buildroot}/%{_dat
 rm -rf %{buildroot}
 
 %files
-%{_libdir}/qt5/plugins/styles/libkvantum.so
-%{_libdir}/qt4/plugins/styles/libkvantum.so
-%{_datadir}/apps/color-schemes/%{realname}.colors
-%{_datadir}/applications/kvantummanager.desktop
 %{_bindir}/kvantumpreview
 %{_bindir}/kvantummanager
+%{_datadir}/apps/color-schemes/%{realname}.colors
+%{_datadir}/applications/kvantummanager.desktop
 %{_datadir}/doc/%{name}/
+%{_datadir}/usr/share/pixmaps/kvantum.svg
+%{_libdir}/qt5/plugins/styles/libkvantum.so
+%{_libdir}/qt4/plugins/styles/libkvantum.so
 
 %changelog
 
