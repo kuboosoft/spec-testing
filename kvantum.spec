@@ -71,7 +71,7 @@ rm -rf %{buildroot}
 %{_datadir}/apps/color-schemes/%{realname}.colors
 %{_datadir}/applications/kvantummanager.desktop
 %{_datadir}/doc/%{name}/
-%{_datadir}/usr/share/pixmaps/kvantum.svg
+%{_datadir}/pixmaps/kvantum.svg
 %{_libdir}/qt5/plugins/styles/libkvantum.so
 %{_libdir}/qt4/plugins/styles/libkvantum.so
 
