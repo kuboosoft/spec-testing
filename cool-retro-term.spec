@@ -11,7 +11,7 @@ Release:       1%{?gver}%{?dist}
 Summary:       Cool Retro Terminal
 
 License:       GPLv2+
-URL:           https://github.com/tsujan/cool-retro-term
+URL:           https://github.com/Swordfish90/cool-retro-term
 Group:         System/X11/Terminals
 Source:	       %{name}-%{version}-%{snapshot}.tar
 Source1:       %{name}-snapshot.sh
@@ -22,11 +22,14 @@ BuildRequires: 	qt5-qtquickcontrols
 BuildRequires:	qt5-qtgraphicaleffects
 BuildRequires:	desktop-file-utils
 BuildRequires:	qt5-qtdeclarative-devel	
+BuildRequires:	qmltermwidget
 
 Requires:	qt5-qtdeclarative
 Requires:	qt5-qtgraphicaleffects
 Requires:	qt5-qtquickcontrols
 Requires:	qt5-qtbase
+Requires:	qmltermwidget
+Requires: 	hicolor-icon-theme
 
 %description
 cool-retro-term is a terminal emulator which mimics the look and feel of the 
@@ -50,8 +53,11 @@ desktop-file-install                            \
 --dir=${RPM_BUILD_ROOT}%{_datadir}/applications \
 %{name}.desktop
 
-%clean
-rm -rf %{buildroot}
+%post
+gtk-update-icon-cache %{_datadir}/icons/hicolor/
+
+%postun 
+gtk-update-icon-cache %{_datadir}/icons/hicolor/
 
 %files
 %{_bindir}/%{name}
