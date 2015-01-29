@@ -16,7 +16,7 @@ Group:         System/X11/Terminals
 Source:	       %{name}-%{version}-%{snapshot}.tar
 Source1:       %{name}-snapshot.sh
 
-BuildRequires:	git
+BuildRequires:	git curl
 BuildRequires: 	qt5-qtbase-devel 
 BuildRequires:	qt5-qtdeclarative-devel
 BuildRequires: 	qt5-qtquickcontrols	
