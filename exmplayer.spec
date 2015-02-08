@@ -1,4 +1,4 @@
-%global realname %{name}
+%global realname ExMplayer
 
 
 Name:          exmplayer
