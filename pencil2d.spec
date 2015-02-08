@@ -6,7 +6,7 @@
 
 
 Name:          pencil2d
-Version:       0.5.4
+Version:       0.5.5
 Release:       1%{?gver}%{?dist}
 Summary:       Animation/drawing software.
 
