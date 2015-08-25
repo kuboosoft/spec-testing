@@ -1,19 +1,19 @@
 %global realname ExMplayer
+%global _with_ffmpeg 0
+%global _with_ffmpegex 1
 
 
 Name:          exmplayer
-Version:       3.8.0
+Version:       5.0.1
 Release:       1%{?dist}
 Summary:       MPlayer GUI with thumbnail seeking, 3D Video support,
 
 License:       GPLv2+
 URL:           http://%{name}.sourceforge.net/
-Group:         Development/Libraries
+Group:         Applications/Multimedia
 Source:	       https://launchpad.net/~%{name}-dev/+archive/%{name}/+files/%{name}_%{version}.tar.gz
 
 BuildRequires: 	qt-devel 
-BuildRequires:	ffmpeg-devel
-BuildRequires:	ffmpeg
 
 Requires:	mplayer	
 Requires:	ffmpeg
@@ -46,10 +46,15 @@ install -dm755 %{buildroot}/etc/%{name}
 install -m644 linux_build/{sc_default.xml,fmts} %{buildroot}/etc/%{name}
 #
 install -dm755 %{buildroot}/usr/share/%{name}
+
+%if 0%{?_with_ffmpegex}
 # use native installed ffmpeg 
-ln -s /usr/bin/ffmpeg  %{buildroot}/usr/share/%{name}/ffmpeg
-# or bundled ffmpeg
-#install -m755 linux_build/ffmpeg %{buildroot}/usr/share/%{name}
+ln -sf /usr/bin/ffmpeg  %{buildroot}/usr/share/%{name}/ffmpeg
+%endif
+
+%if 0%{?_with_ffmpeg}
+install -m755 linux_build/ffmpeg %{buildroot}/usr/share/%{name}
+%endif
 
 
 %files
@@ -60,8 +65,19 @@ ln -s /usr/bin/ffmpeg  %{buildroot}/usr/share/%{name}/ffmpeg
 %{_datadir}/%{name}/
 %{_sysconfdir}/%{name}/fmts
 %{_sysconfdir}/%{name}/sc_default.xml
+%{_datadir}/%{name}/ffmpeg
+
 
 %changelog
+
+* Sat Aug 22 2015 David Vasquez <davidjeremias82 at gmail dot com> - 5.0.1-1
+- Updated to 5.0.1
+
+* Tue Jul 28 2015 Rupesh Sreeraman <exmplayer.dev@gmail.com> - 5.0.0-1
+- updated  for version 5
+
+* Sat Apr 04 2015 David Vasquez <davidjeremias82 at gmail dot com> - 3.8.0-2
+- Excluded ffmpeg-devel
 
 * Sat Feb 07 2015 David Vasquez <davidjeremias82 at gmail dot com> - 3.8.0-1
 - initial build rpm
