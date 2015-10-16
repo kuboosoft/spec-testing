@@ -25,6 +25,13 @@ ExclusiveArch:      i686 x86_64
 This package contains the rtlwifi wireless firmware files
 rtl8192ce, rtl8192se, rtl8192de, rtl8188ee, rtl8192ee, rtl8723ae, rtl8723be, and rtl8821ae.
 
+%package -n	rtlwifi-firmware
+Summary:	rtlwifi userland package
+Requires: %{name}-kmod  >= %{version}
+Provides: %{name}-kmod-common = %{version}
+%description -n rtlwifi-firmware
+userland package for more details http://rpmfusion.org/Packaging/KernelModules/Kmods2#userland_package
+
 %prep
 # error out if there was something wrong with kmodtool
 %{?kmodtool_check}
@@ -87,6 +94,9 @@ for kernel_version in %{?kernel_versions}; do
  popd
 done
 %{?akmod_install}
+
+
+%files -n rtlwifi-firmware
 
 %changelog
 * Sat Sep 12 2015 David Vasquez <davidjeremias82 at gmail dot com> - 1-1
