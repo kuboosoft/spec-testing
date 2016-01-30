@@ -74,6 +74,7 @@ License: Propietary
 Group: Development/Tools
 Source: %{name}-%{version}.tar.xz
 URL: http://www.genymotion.com/
+Requires: kernel-devel gstreamer-plugins-base libpng12 ffmpeg-compat net-tools protobuf qca qt5-qtscript qt5-qtwebkit
 
 
 %description
