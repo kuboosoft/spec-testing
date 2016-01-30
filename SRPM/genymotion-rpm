@@ -63,7 +63,7 @@ cd -
 cat <<EOF > $rpmbuild/SPECS/$name.spec
 # Don't try fancy stuff like debuginfo, which is useless on binary-only
 # packages. 
-
+AutoReqProv: no
 %define          debug_package %{nil}
 
 Summary: Complete set of tools that provides a virtual environment for Android
