@@ -120,7 +120,7 @@ wait ${!}
 
 rpmbuild -ba $rpmbuild/SPECS/$name.spec
 
-#mv -f $pkgdir/*.rpm $HOME
-#rm -rf $pkgdir/
+
+rm -rf $pkgdir/
 
 
