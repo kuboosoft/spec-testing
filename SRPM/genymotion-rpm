@@ -35,10 +35,10 @@ yes | bash ./$name-$ver-linux_$_ARCH.bin -d $pkgdir/$_datadir/
 wait ${!}
 
 install -d $pkgdir/usr/bin
-  ln -s $_datadir/$name/$name $pkgdir/usr/bin/$name
-  ln -s $_datadir/$name/$name-shell $pkgdir/usr/bin/$name-shell
-  ln -s $_datadir/$name/player $pkgdir/usr/bin/$name-player
-  ln -s $_datadir/$name/gmtool $pkgdir/usr/bin/gmtool
+  ln -sf $_datadir/$name/$name $pkgdir/usr/bin/$name
+  ln -sf $_datadir/$name/$name-shell $pkgdir/usr/bin/$name-shell
+  ln -sf $_datadir/$name/player $pkgdir/usr/bin/$name-player
+  ln -sf $_datadir/$name/gmtool $pkgdir/usr/bin/gmtool
 
 cat > $pkgdir/$_datadir/applications/$name.desktop << EOF
 [Desktop Entry]
