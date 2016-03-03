@@ -101,6 +101,8 @@ chrpath --delete %{buildroot}/usr/share/genymotion/genymotion
 chrpath --delete %{buildroot}/usr/share/genymotion/device-upgrade
 chrpath --delete %{buildroot}/usr/share/genymotion/player
 
+ln -sf /usr/share/genymotion/libminicrypt.so.1.0.0 %{buildroot}/usr/share/genymotion/libminicrypt.so.1
+
 %clean
 rm -rf %{buildroot}
 
