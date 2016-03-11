@@ -1,0 +1,26 @@
+--- Makefile.in	2016-03-03 23:56:29.000000000 -0600
++++ Makefile-Jarvis.in	2016-03-04 00:33:54.017747797 -0600
+@@ -464,7 +464,6 @@
+ install-binaries: install-scripts
+ 	@echo "Copying @APP_NAME_LC@ binary to $(DESTDIR)$(libdir)/@APP_NAME_LC@/"
+ 	@install -d $(DESTDIR)$(libdir)/@APP_NAME_LC@
+-	@cd $(DESTDIR)$(libdir); [ -L xbmc ] || [ -d xbmc ] || ln -s @APP_NAME_LC@ xbmc
+ ifeq (1,@USE_X11@)
+ 	@install @APP_NAME_LC@-xrandr $(DESTDIR)$(libdir)/@APP_NAME_LC@/@APP_NAME_LC@-xrandr
+ endif
+@@ -506,7 +505,6 @@
+ 	@install tools/Linux/@APP_NAME_LC@-standalone.sh $(DESTDIR)$(bindir)/@APP_NAME_LC@-standalone
+ 	@cd $(DESTDIR)$(bindir); [ -L xbmc-standalone ] || [ -f xbmc-standalone ] ||  ln -s @APP_NAME_LC@-standalone xbmc-standalone
+ 	@install -d $(DESTDIR)$(datarootdir)/@APP_NAME_LC@
+-	@cd $(DESTDIR)$(datarootdir); [ -L xbmc ] || [ -d xbmc ] || ln -s @APP_NAME_LC@ xbmc
+ 	@install -d $(DESTDIR)$(datarootdir)/xsessions
+ 	@install -m 0644 tools/Linux/@APP_NAME_LC@-xsession.desktop $(DESTDIR)$(datarootdir)/xsessions/@APP_NAME_LC@.desktop
+ 	@cd $(DESTDIR)$(datarootdir)/xsessions; [ -L xbmc.desktop ] || [ -f xbmc.desktop ] || ln -s @APP_NAME_LC@.desktop xbmc.desktop
+@@ -574,7 +572,6 @@
+ 	@for f in project/cmake/scripts/common/*.cmake; do \
+ 	  install -m 0644 $$f $(DESTDIR)$(libdir)/@APP_NAME_LC@; \
+ 	done
+-	@cd $(DESTDIR)$(includedir); [ -L xbmc ] || [ -d xbmc ] || ln -s @APP_NAME_LC@ xbmc
+ 
+ uninstall:
+ 	@echo "Removing @APP_NAME@..."
