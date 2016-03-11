@@ -1,5 +1,7 @@
 %bcond_with nonfree 
 
+%define _kodi_addons_dir %{_datadir}/kodi/addons
+
 #globals for kodi-16.0-20160303-a5f3a99.tar.xz
 %global gitdate 20160303
 %global gitversion a5f3a99
