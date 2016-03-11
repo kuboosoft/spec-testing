@@ -27,7 +27,10 @@ Source0:     %{name}-%{version}-%{snapshot}.tar.xz
 Source1:     %{name}-snapshot.sh
 #-------------------------------------
 # PATCH no make symbolic links
-Patch:      no-xbmc-symbolic-link.patch
+Patch:       no-xbmc-symbolic-link.patch
+#-------------------------------------
+# Patch droped CxImage
+Patch1:	     CxImage-drop.patch
 #-------------------------------------
 BuildRoot:   %{_tmppath}/%{name}-%{version}-build
 ExcludeArch: ppc64
@@ -154,6 +157,7 @@ BuildRequires:  zlib-devel
 BuildRequires:  pkgconfig(glib-2.0)
 BuildRequires:	git
 BuildRequires:	dbus-devel
+BuildRequires:	giflib-devel
 %ifarch %{arm}
 BuildRequires:  mesa-libEGL-devel
 BuildRequires:  mesa-libGLES-devel
@@ -211,6 +215,13 @@ Development files for the Kodi media Center
 %setup -n xbmc
 
 %patch -p0
+
+%if 0%{?fedora} >= 24
+%patch1 -p0 
+%endif
+
+# sed -i '/\<cximage\>/d' Makefile.in
+
 
 chmod +x bootstrap
 
@@ -348,7 +359,10 @@ sed -i 's|/usr/lib/kodi|/usr/lib64/kodi|g' %{buildroot}/%{_libdir}/kodi/kodi-con
 
 %changelog
 
-* Thu Mar 03 2016 David Vásquez <davidjeremias82 at gmail dot com> - 16.0-20160303-a5f3a99-2
+* Fri Mar 11 2016 David Vásquez <davidjeremias82 at gmail dot com> - 16.0-20160303-a5f3a99-2
+- Droped CxImage in Fedora >= 24
+
+* Thu Mar 03 2016 David Vásquez <davidjeremias82 at gmail dot com> - 16.0-20160303-a5f3a99-1
 - Updated to 16.0-20160303-a5f3a99
 
 * Mon Oct 19 2015 David Vásquez <davidjeremias82 AT gmail DOT com> - 15.2-20151019-02e7013-1

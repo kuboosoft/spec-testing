@@ -1,0 +1,31 @@
+--- lib/cximage-6.0/Makefile.in	2016-03-03 23:56:29.000000000 -0600
++++ Makefile-1.in	2016-03-11 11:49:26.787018897 -0600
+@@ -4,8 +4,8 @@
+ ARCHIVE=$(SO:.so=.a)
+ SYSDIR=../../system
+ SLIB=$(SYSDIR)/$(SO)
+-DIRS=CxImage raw jbig
+-SLIBS=CxImage/cximage.a raw/raw.a jbig/jbig.a
++DIRS=raw jbig
++SLIBS=raw/raw.a jbig/jbig.a
+ 
+ ifeq ($(findstring osx,$(ARCH)), osx)
+ 	export ARCH
+@@ -18,7 +18,7 @@
+ $(SLIB): $(SLIBS)
+ ifeq ($(findstring osx,$(ARCH)), osx)
+ 	$(CXX) $(LDFLAGS) -bundle -undefined dynamic_lookup -lpng -ljpeg -ltiff -lz -o $@ \
+-		CxImage/*.o jasper/*/*.o jbig/*.o raw/*.o
++		jasper/*/*.o jbig/*.o raw/*.o
+ else
+ 	$(CXX) $(CFLAGS) $(LDFLAGS) -shared -o $(SLIB) -Wl,--whole-archive $(SLIBS) \
+ 		-Wl,--no-whole-archive -lpng -ljasper -ljpeg -ltiff -lz -Wl,--unresolved-symbols=ignore-all
+@@ -26,8 +26,6 @@
+ 
+ $(SLIBS): compile 
+ 
+-CxImage/cximage.a:
+-	$(MAKE) -C CxImage ARCH=$(ARCH)
+ 
+ jbig/jbig.a:
+ 	$(MAKE) -C jbig
