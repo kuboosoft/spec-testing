@@ -153,6 +153,7 @@ BuildRequires:  zip
 BuildRequires:  zlib-devel
 BuildRequires:  pkgconfig(glib-2.0)
 BuildRequires:	git
+BuildRequires:	dbus-devel
 %ifarch %{arm}
 BuildRequires:  mesa-libEGL-devel
 BuildRequires:  mesa-libGLES-devel
