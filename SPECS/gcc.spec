@@ -1,4 +1,4 @@
-%global _islver 0.16.1
+%global _islver 0.12.2
 %global _cloogver 0.18.4
 %global _mpfrver 3.1.4
 %global _gmpver 6.1.0
