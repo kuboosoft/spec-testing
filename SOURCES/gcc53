@@ -1,0 +1,23 @@
+#! /bin/bash
+
+gver=5.3.0
+gcc_target_platform=$(uname -m)-fedoraunited-linux-gnu
+
+if [ `getconf LONG_BIT` = "64" ]
+then
+lib=lib64
+else
+lib=lib
+fi
+
+
+export CC=/opt/gcc-$gver/bin/gcc
+export CXX=/opt/gcc-$gver/bin/g++
+export CPP=/opt/gcc-$gver/bin/cpp
+export LD=/opt/gcc-$gver/bin/gcc
+#
+
+# gcc53
+export LDFLAGS="-L/opt/gcc-$gver/$lib/gcc/$gcc_target_platform/$lib/" 
+export CPPFLAGS="-I/opt/gcc-$gver/$lib/gcc/$gcc_target_platform/$gver/include/"
+#
