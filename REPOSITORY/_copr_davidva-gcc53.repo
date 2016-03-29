@@ -1,0 +1,8 @@
+[davidva-gcc53]
+name=Copr repo for gcc53 owned by davidva
+baseurl=https://copr-be.cloud.fedoraproject.org/results/davidva/gcc53/fedora-23-$basearch/
+skip_if_unavailable=True
+gpgcheck=1
+gpgkey=https://copr-be.cloud.fedoraproject.org/results/davidva/gcc53/pubkey.gpg
+enabled=1
+enabled_metadata=1
