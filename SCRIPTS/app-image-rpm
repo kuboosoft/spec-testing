@@ -52,7 +52,7 @@ done
 
 wait ${!}
 
-ls *.rpm | grep -v -e "$rpmfile" | sed 's:/::g' | tee rpms_list
+ls *.rpm | grep -v 'src.rpm' | sed 's:/::g' | tee rpms_list
 
 rpmsfiles=rpms_list
 while IFS= read -r liner; do
@@ -60,13 +60,7 @@ rpm2cpio $liner | cpio -idmv
 done <"$rpmsfiles"
 
 
-trashrpms3=$(ls *.rpm | grep -v -e 'src.rpm' -e "$rpmfile")
+trashrpms3=$(ls *.rpm | grep -v 'src.rpm' -e "$rpmfile")
 find . -name "$trashrpms3" | while read file; do 
 rm -v "$file" 
 done
-
-
-
-
-
-
