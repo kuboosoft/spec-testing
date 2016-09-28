@@ -60,7 +60,7 @@ rpm2cpio $liner | cpio -idmv
 done <"$rpmsfiles"
 
 
-trashrpms3=$(ls *.rpm | grep -v 'src.rpm' -e "$rpmfile")
+trashrpms3=$(ls *.rpm | grep -v -e 'src.rpm' -e "$rpmfile")
 find . -name "$trashrpms3" | while read file; do 
 rm -v "$file" 
 done
