@@ -1,0 +1,54 @@
+#! /bin/bash
+
+ARCH=$(uname -m)
+
+if [ "$ARCH" = x86_64 ]; then 
+inverse=i686
+else
+inverse=x86_64
+fi
+
+rpmfile=$(ls *.rpm | grep -v 'src.rpm')
+rpm -qp --requires $PWD/$rpmfile | grep -v 'rpmlib' | tee foo_list  
+
+file=foo_list
+while IFS= read -r line; do
+dnf download $line --destdir $PWD/
+done <"$file"
+
+wait ${!}
+
+trashrpms=$(ls *.$inverse.rpm | grep -v -e 'src.rpm' -e "$rpmfile")
+rm -f $trashrpms
+
+ls *.rpm | grep -v -e "$rpmfile" | sed 's:/::g' | tee allrpms_dep
+
+allrpmsfiles=allrpms_dep
+while IFS= read -r linea; do
+rpm -qp --requires $PWD/$linea | grep -v 'rpmlib' | tee sub_list  
+done <"$allrpmsfiles"
+
+
+wait ${!}
+
+
+filesub=sub_list
+while IFS= read -r linesub; do
+dnf download $linesub --destdir $PWD/
+done <"$filesub"
+
+wait ${!}
+
+
+trashrpms2=$(ls *.$inverse.rpm | grep -v -e 'src.rpm' -e "$rpmfile")
+rm -f $trashrpms2
+
+
+ls *.rpm | grep -v -e "$rpmfile" | sed 's:/::g' | tee rpms_list
+
+rpmsfiles=rpms_list
+while IFS= read -r liner; do
+rpm2cpio $liner | cpio -idmv
+done <"$rpmsfiles"
+
+rm -f $trashrpms2
