@@ -19,7 +19,12 @@ done <"$file"
 wait ${!}
 
 trashrpms=$(ls *.$inverse.rpm | grep -v -e 'src.rpm' -e "$rpmfile")
-rm -f $trashrpms
+
+find . -name "$trashrpms" | while read file; do 
+rm -v "$file" 
+done
+
+wait ${!}
 
 ls *.rpm | grep -v -e "$rpmfile" | sed 's:/::g' | tee allrpms_dep
 
@@ -41,8 +46,11 @@ wait ${!}
 
 
 trashrpms2=$(ls *.$inverse.rpm | grep -v -e 'src.rpm' -e "$rpmfile")
-rm -f $trashrpms2
+find . -name "$trashrpms2" | while read file; do 
+rm -v "$file" 
+done
 
+wait ${!}
 
 ls *.rpm | grep -v -e "$rpmfile" | sed 's:/::g' | tee rpms_list
 
@@ -51,4 +59,14 @@ while IFS= read -r liner; do
 rpm2cpio $liner | cpio -idmv
 done <"$rpmsfiles"
 
-rm -f $trashrpms2
+
+trashrpms3=$(ls *.rpm | grep -v -e 'src.rpm' -e "$rpmfile")
+find . -name "$trashrpms3" | while read file; do 
+rm -v "$file" 
+done
+
+
+
+
+
+
