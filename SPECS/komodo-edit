@@ -1,0 +1,79 @@
+%global _enable_debug_package 0
+%global debug_package %{nil}
+AutoReqProv: no
+
+# This appears in the download URL
+%define _build 17456
+
+# This essentially determines the appropriate binary tarball
+%if %{_arch} == "i586"
+%define _buildarch x86
+%endif
+%if %{_arch} == "x86_64"
+%define _buildarch x86_64
+%endif
+
+Name:           komodo-edit
+Version:        10.1.4
+Release:        0.1
+License:        MPLv2.0
+Summary:        The Komodo text editor
+Url:            http://activestate.com
+Group:          Applications/Editors
+#Source:        http://downloads.activestate.com/Komodo/releases/version/Komodo-Edit-version-_build-linux-x86.tar.gz
+Source:         http://downloads.activestate.com/Komodo/releases/%{version}/Komodo-Edit-%{version}-%{_build}-linux-x86_64.tar.gz
+%if 0%{?suse_version}
+BuildRequires:  update-desktop-files
+%endif
+BuildRequires:  hicolor-icon-theme
+BuildRequires:  python-devel
+BuildRequires:  python-setuptools
+BuildRequires:  pkgconfig(gtk+-2.0)
+BuildRequires:  patch
+BuildRequires:  fdupes
+Requires:       gtk2
+Requires:       libjpeg-turbo
+Recommends:     xterm
+
+%description
+Komodo Edit, an open-source text editor developed by ActiveState and built using the Mozilla platform.
+
+%prep
+%setup -q -n Komodo-Edit-%{version}-%{_build}-linux-%{_buildarch}
+
+%build
+LD_LIBRARY_PATH=$PWD/INSTALLDIR/lib/mozilla:"$LD_LIBRARY_PATH"
+INSTALLDIR/lib/python/bin/python -E support/_install.py -I %{_builddir}/%{_libdir}/%{name}
+
+%install
+sed -i "/#!/c\#!%{_libdir}/komodo-edit/lib/python/bin/python2.7" %{_builddir}/%{_libdir}/%{name}/lib/python/bin/python-config
+install -dm 755 %{buildroot}/%{_libdir}/%{name} \
+%{buildroot}/%{_prefix}
+mv -f %{_builddir}/%{_libdir}/%{name}/lib %{buildroot}/%{_libdir}/%{name}/
+mv -f %{_builddir}/%{_libdir}/%{name}/share %{buildroot}/%{_prefix}/
+find %{buildroot} -name "cile_LANG.py" -delete
+find %{buildroot} -name "cmdln.py" -delete
+find %{buildroot} -name "codeintel_LANG.py" -delete
+find %{buildroot} -name "koLANG_UDL_Language.py" -delete
+find %{buildroot} -name 'XPCOM Component (Python).py' -delete
+
+install -dm 755 %{buildroot}/%{_bindir}
+ln -sf %{_libdir}/%{name}/lib/mozilla/komodo %{buildroot}/%{_bindir}/komodo
+
+export NO_BRP_CHECK_RPATH=true
+
+
+%files
+%{_bindir}/komodo
+%{_libdir}/%{name}/
+%{_datadir}/desktop/komodo-edit-10.desktop
+%{_datadir}/icons/komodo*.png
+%{_datadir}/icons/komodo*.xpm
+
+%changelog
+
+* Fri Jan 13 2017 David Va <davidva AT tutanota DOT com> - 10.1.4-0.1
+- Some changes
+
+* Thu Jan 12 2017 Brenton Horne - 10.1.4-0
+- Initial build
