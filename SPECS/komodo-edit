@@ -47,10 +47,16 @@ INSTALLDIR/lib/python/bin/python -E support/_install.py -I %{_builddir}/%{_libdi
 
 %install
 sed -i "/#!/c\#!%{_libdir}/komodo-edit/lib/python/bin/python2.7" %{_builddir}/%{_libdir}/%{name}/lib/python/bin/python-config
+sed -i '/Exec=/c\Exec="/usr/bin/komodo" %F' %{_builddir}/%{_libdir}/%{name}/share/desktop/komodo-edit-10.desktop
+sed -i '/Icon=/c\Icon=/usr/share/icons/komodo48.png' %{_builddir}/%{_libdir}/%{name}/share/desktop/komodo-edit-10.desktop
+
 install -dm 755 %{buildroot}/%{_libdir}/%{name} \
-%{buildroot}/%{_prefix}
+%{buildroot}/%{_datadir}/applications/ \
+
+
 mv -f %{_builddir}/%{_libdir}/%{name}/lib %{buildroot}/%{_libdir}/%{name}/
-mv -f %{_builddir}/%{_libdir}/%{name}/share %{buildroot}/%{_prefix}/
+mv -f %{_builddir}/%{_libdir}/%{name}/share/icons %{buildroot}/%{_datadir}/
+mv -f %{_builddir}/%{_libdir}/%{name}/share/desktop/komodo-edit-10.desktop %{buildroot}/%{_datadir}/applications/
 find %{buildroot} -name "cile_LANG.py" -delete
 find %{buildroot} -name "cmdln.py" -delete
 find %{buildroot} -name "codeintel_LANG.py" -delete
@@ -66,7 +72,7 @@ export NO_BRP_CHECK_RPATH=true
 %files
 %{_bindir}/komodo
 %{_libdir}/%{name}/
-%{_datadir}/desktop/komodo-edit-10.desktop
+%{_datadir}/applications/komodo-edit-10.desktop
 %{_datadir}/icons/komodo*.png
 %{_datadir}/icons/komodo*.xpm
 
